@@ -1,0 +1,25 @@
+{
+	"name": "wiperaw/yii2-recaptcha",
+	"description": "",
+	"keywords": ["yii2", "extension", "widget", "yii2-recaptcha", "google recaptcha", "yii2 behavior"],
+	"type": "yii2-extension",
+	"license": "MIT",
+	"support": {
+		"issues": "https://github.com/wiperawa/yii2-recaptcha/issues",
+		"wiki": "https://github.com/wiperawa/yii2-recaptcha/wiki/",
+		"source": "https://github.com/wiperawa/yii2-recaptcha"
+	},
+	"authors": [
+		{
+			"name": "Dmitriy Lukeryanov",
+			"email": "wiperawa@gmail.com"
+		}
+	],
+	"require": {
+		"yiisoft/yii2": "*",
+		"google/recaptcha": "^1.2"
+	},
+	"autoload": {
+		"psr-4": { "wiperawa\\recaptcha\\": "" }
+	}
+}
