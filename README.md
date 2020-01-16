@@ -53,7 +53,7 @@ use wiperawa\recaptcha\GoogleRecaptchaWidget;
 ...
 <?php $form = ActiveForm::begin(...) ?>
 
-<?= $form->field($model,'recaptcha_token')->
+<?= $form->field($model,'recaptchaToken')->
     widget(GoogleRecaptchaWidget::class,[
         'siteKey' => 'Google reCAPTCHA SITEKEY here',
         'expectedAction' => 'form_submit',

@@ -13,7 +13,7 @@ class GoogleRecaptchaBehavior extends Behavior {
     /*
      * Public property to be attached to owner model, used to validate response, should be present in activeForm
      */
-    public $recaptcha_token;
+    public $recaptchaToken;
 
     /*
      * Google reCAPTCHA SECRET key
@@ -45,24 +45,26 @@ class GoogleRecaptchaBehavior extends Behavior {
      * @inheritDoc
      * @return array
      */
-    public function events(){
+    public function events()
+    {
         return [
             Model::EVENT_AFTER_VALIDATE => 'afterValidate'
         ];
     }
 
     /**
-     * After validation complete, we need to clear recaptcha_token, in case some validation error happend and need to display form again.
+     * After validation complete, we need to clear recaptchaToken, in case some validation error happend and need to display form again.
      * and detach required validator, because activeForm beforeSubmit event will be triggered only after success form validation
      * @return void
      */
-    public function afterValidate(){
-        if ($this->owner->recaptcha_token != '') {
-            $this->owner->recaptcha_token = '';
+    public function afterValidate()
+    {
+        if ($this->owner->recaptchaToken != '') {
+            $this->owner->recaptchaToken = '';
         }
         foreach ($this->owner->validators as $key=>$validator) {
             if ( ($validator instanceof \yii\validators\RequiredValidator) &&
-                in_array('recaptcha_token',$validator->attributes) ) {
+                in_array('recaptchaToken',$validator->attributes) ) {
                 $this->owner->validators->offsetUnset($key);
                 break;
             }
@@ -74,14 +76,15 @@ class GoogleRecaptchaBehavior extends Behavior {
      * @param \yii\base\Component $owner
      * @return bool
      */
-    public function attach($owner){
+    public function attach($owner)
+    {
 
         parent::attach($owner);
         /** @var $owner yii\base\Model */
 	
         if (Yii::$app->request->isPost && $this->enabled) {
             $validators = $owner->validators;
-            $validators->append(Validator::createValidator('required',$owner,'recaptcha_token'));
+            $validators->append(Validator::createValidator('required',$owner,'recaptchaToken'));
 
             $validators->append(
             Validator::createValidator(function ($attr) use ($owner)  {
@@ -102,7 +105,7 @@ class GoogleRecaptchaBehavior extends Behavior {
 
                 }
                 return true;
-            },$owner,'recaptcha_token')
+            },$owner,'recaptchaToken')
             );
         }
 
