@@ -66,3 +66,4 @@ use wiperawa\recaptcha\GoogleRecaptchaWidget;
 
 That's it!
 Widget will look for 'beforeSubmit' action, then receive google reCAPTCHA token, and submit form.
+After form submitted, behavior attach token validation, and validate input. if error happend, validator will attach error to model $errors prop.
