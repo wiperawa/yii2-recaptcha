@@ -3,7 +3,7 @@ Yii2 widget and model behavior for Google Recaptcha v3.
 
 This widget and behavior allow you to easy add  reCAPTCHA v3 (invisible reCAPTCHA) by Google into your project.
 
-##Installation
+## Installation
 The preferred way to install this extension is through [composer](http://getcomposer.org/download/).
 
 Either run
@@ -20,7 +20,8 @@ or add
 
 to the ```require``` section of your `composer.json` file.
 
-##Usage
+## Usage
+
 1. First of all we need to add site in google reCAPTCHA [console](https://www.google.com/recaptcha/admin/)
 and get SECRET and SITE keys.
 
