@@ -1,7 +1,7 @@
 {
 	"name": "wiperawa/yii2-recaptcha",
 	"description": "",
-	"keywords": ["yii2", "extension", "widget", "yii2-recaptcha", "google recaptcha", "yii2 behavior"],
+	"keywords": ["yii2", "extension", "widget", "yii2-recaptcha", "google recaptcha", "invisible recaptcha", "v3 recaptcha", "yii2 behavior"],
 	"type": "yii2-extension",
 	"license": "MIT",
 	"support": {
