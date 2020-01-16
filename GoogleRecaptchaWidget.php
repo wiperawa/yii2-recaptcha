@@ -3,12 +3,12 @@
 namespace wiperawa\recaptcha;
 
 use Yii;
+use yii\web\View;
+use Yii\helpers\Html;
 use yii\helpers\ArrayHelper;
 use yii\widgets\InputWidget;
 use yii\base\InvalidConfigException;
 
-use Yii\helpers\Html;
-use yii\web\View;
 
 class GoogleRecaptchaWidget extends InputWidget
 {
@@ -21,7 +21,7 @@ class GoogleRecaptchaWidget extends InputWidget
     /**
      *Google Recaptha Sitekey
      */
-    public $sitekey = '';
+    public $siteKey = '';
 
     /**
      * Token input classname
@@ -33,7 +33,7 @@ class GoogleRecaptchaWidget extends InputWidget
      * Expected Action to be send to Google, used to validate response in recaptchaBehavior.
      * use the same action that you specified in recaptcha model behavior
      */
-    public $expected_action = 'form_sumit';
+    public $expectedAction = 'form_sumit';
 
     /**
      * @inheritDoc
@@ -43,7 +43,7 @@ class GoogleRecaptchaWidget extends InputWidget
 
         parent::init();
 
-        if (!$this->sitekey) {
+        if (!$this->siteKey) {
             throw new InvalidConfigException('Setup correct Google Recaptcha Sitekey!');
         }
     }
@@ -70,19 +70,19 @@ class GoogleRecaptchaWidget extends InputWidget
      */
     protected function registerAssets()
     {
-        $this->getView()->registerJsFile(self::GOOGLE_RECAPTCHA_SCRIPT_URL . $this->sitekey, ['position' => View::POS_END, 'async' => true, 'defer' => true]);
+        $this->getView()->registerJsFile(self::GOOGLE_RECAPTCHA_SCRIPT_URL . $this->siteKey, ['position' => View::POS_END, 'async' => true, 'defer' => true]);
 
         $js = <<<JS
             
             function w_run_recaptcha(action, callback) {
                 grecaptcha.ready(() => {
-                        grecaptcha.execute("{$this->sitekey}", {action: action}).then(function (token) {
+                        grecaptcha.execute("{$this->siteKey}", {action: action}).then(function (token) {
                             callback(token);
                     });
                 });
             }
             
-            let expected_action = "{$this->expected_action}";
+            let expected_action = "{$this->expectedAction}";
             let token_input = $(".{$this->class}");
             let _form = $(".{$this->class}").closest('form');
             if (_form) {
@@ -96,10 +96,6 @@ class GoogleRecaptchaWidget extends InputWidget
                         return false;
                     }
                 })
-            }
-            
-            if (token_input.siblings('.invalid-feedback').html() != '' ) {
-        	token_input.addClass('is-invalid');
             }
         JS;
         $this->getView()->registerJs($js,View::POS_READY);
@@ -117,12 +113,14 @@ class GoogleRecaptchaWidget extends InputWidget
         $this->options = ArrayHelper::merge(
             $this->options, ['class' => $this->class]
         );
-
+	
         if ($this->hasModel()) {
-            $field = Html::activeHiddenInput($this->model, $this->attribute, $this->options);
+            //$this->addErrorClassIfNeeded();
+            $field = $this->field->hiddenInput($this->options);
         } else {
             $field = Html::hiddenInput($this->name, '', $this->options);
         }
         return $field;
     }
+
 }
