@@ -40,6 +40,7 @@ public function behaviors()
                 'secretKey' => 'Google reCAPTCHA Secret Key here',
                 'enabled' => true, //Can omit this parameter. just in case you want to temporarily switch off recaptcha 
                 'expectedAction' => 'form_submit' //google reCAPTCHA expected action. action we expect from our form.
+                'scoreThreshold' => 0.5 //reCAPTCHA score treshold. Optional. default - 0.5
             ],
         ];
     }
